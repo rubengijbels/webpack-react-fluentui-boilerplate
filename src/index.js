@@ -25,7 +25,7 @@ const getOptionTextForKey = (options, key) => {
 
 const App = () => {
 
-  const [theBestKey, setTheBestKey] = React.useState()
+  const [theBestKey, setTheBestKey] = React.useState(null)
 
   const onChange = (event, theBest) => {
     setTheBestKey(theBest.key)
@@ -42,7 +42,7 @@ const App = () => {
         onChange={onChange}
         label="Pick one"
         required={true}
-        selectedKey={undefined}
+        selectedKey={theBestKey}
       />
       {theBestKey && (
         <div>
@@ -63,7 +63,7 @@ const App = () => {
 
           <PrimaryButton
             styles={{ marginTop: "20px" }}
-            onClick={() => setTheBestKey(undefined)}>
+            onClick={() => setTheBestKey(null)}>
             Reset
           </PrimaryButton>
         </div>
