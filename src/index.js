@@ -2,26 +2,21 @@
 import * as React from "react"
 import * as ReactDOM from "react-dom"
 
-import { Depths } from '@fluentui/theme';
-import { Text } from '@fluentui/react/lib/Text';
-import { FontSizes } from '@fluentui/theme';
-import { ChoiceGroup, IChoiceGroupOption } from '@fluentui/react/lib/ChoiceGroup';
-import { DefaultButton, PrimaryButton } from '@fluentui/react/lib/Button';
+import { FontSizes } from "@fluentui/theme"
+import { Depths } from "@fluentui/theme"
+import { Text } from "@fluentui/react/lib/Text"
+import { ChoiceGroup, IChoiceGroupOption } from "@fluentui/react/lib/ChoiceGroup"
+import { DefaultButton, PrimaryButton } from "@fluentui/react/lib/Button"
 
 const options = [
-  { key: 'laurens', text: 'Laurens' },
-  { key: 'ruben', text: 'Ruben' },
+  { key: "laurens", text: "Laurens" },
+  { key: "ruben", text: "Ruben" },
 ]
 
 const getOptionTextForKey = (options, key) => {
   const option = options.find(o => o.key == key)
-
-  if (option == null)
-    return
-
-  return option.text
+  return option == null ? null : option.text
 }
-
 
 const App = () => {
 
