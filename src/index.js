@@ -71,5 +71,5 @@ const App = () => {
 }
 
 window.initComponent = containerElement => {
-  ReactDOM.render(<App />, document.getElementById("root"))
+  ReactDOM.render(<App />, containerElement)
 }
