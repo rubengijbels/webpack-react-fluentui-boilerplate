@@ -9,8 +9,11 @@ import { ChoiceGroup, IChoiceGroupOption } from "@fluentui/react/lib/ChoiceGroup
 import { DefaultButton, PrimaryButton } from "@fluentui/react/lib/Button"
 
 const options = [
-  { key: "laurens", text: "Laurens" },
-  { key: "ruben", text: "Ruben" },
+  { key: "vb", text: "Vlaams-Brabant" },
+  { key: "wv", text: "West-Vlaanderen" },
+  { key: "ov", text: "Oost-Vlaanderen" },
+  { key: "a", text: "Antwerpen" },
+  { key: "l", text: "Limburg" }
 ]
 
 const getOptionTextForKey = (options, key) => {
@@ -18,28 +21,40 @@ const getOptionTextForKey = (options, key) => {
   return option == null ? null : option.text
 }
 
+const defaultBestProvinceKeyJSON = localStorage.getItem("bestProvince")
+const defaultBestProvinceKey = defaultBestProvinceKeyJSON == null ? null : JSON.parse(defaultBestProvinceKeyJSON)
+
 const App = () => {
 
-  const [theBestKey, setTheBestKey] = React.useState(null)
+  const [bestProvinceKey, setBestProvinceKey] = React.useState(defaultBestProvinceKey)
+
+  const onResetClick = () => {
+    setBestProvinceKey(null)
+    localStorage.removeItem("bestProvince")
+  }
+
+  const onSaveClick = () => {
+    localStorage.setItem("bestProvince", JSON.stringify(bestProvinceKey))
+  }
 
   const onChange = (event, theBest) => {
-    setTheBestKey(theBest.key)
+    setBestProvinceKey(theBest.key)
   }
 
   return (
     <div>
       <Text
         style={{ fontSize: FontSizes.size42 }}>
-        Wie is de beste?
+        Beste provincie?
       </Text>
       <ChoiceGroup
         options={options}
         onChange={onChange}
         label="Pick one"
         required={true}
-        selectedKey={theBestKey}
+        selectedKey={bestProvinceKey}
       />
-      {theBestKey && (
+      {bestProvinceKey && (
         <div>
           <div style={{
             boxShadow: Depths.depth8,
@@ -52,15 +67,28 @@ const App = () => {
           }}>
             <Text
               style={{ fontSize: FontSizes.size32 }}>
-              {"🔥🔥" + getOptionTextForKey(options, theBestKey) + "🔥🔥"}
+              {"🔥🔥" + getOptionTextForKey(options, bestProvinceKey) + "🔥🔥"}
             </Text>
           </div>
 
-          <PrimaryButton
-            styles={{ marginTop: "20px" }}
-            onClick={() => setTheBestKey(null)}>
-            Reset
-          </PrimaryButton>
+          <div style={{
+            display: "flex",
+            marginTop: "20px"
+          }}>
+            <DefaultButton
+              style={{ marginRight: "10px" }}
+              onClick={onResetClick}>
+              Reset
+            </DefaultButton>
+            <PrimaryButton
+              onClick={onSaveClick}>
+              Save
+            </PrimaryButton>
+
+
+          </div>
+
+
         </div>
       )
       }
