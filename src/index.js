@@ -37,8 +37,8 @@ const App = () => {
     localStorage.setItem("bestProvince", JSON.stringify(bestProvinceKey))
   }
 
-  const onChange = (event, theBest) => {
-    setBestProvinceKey(theBest.key)
+  const onChange = (event, bestProvince) => {
+    setBestProvinceKey(bestProvince.key)
   }
 
   return (
@@ -70,7 +70,6 @@ const App = () => {
               {"🔥🔥" + getOptionTextForKey(options, bestProvinceKey) + "🔥🔥"}
             </Text>
           </div>
-
           <div style={{
             display: "flex",
             marginTop: "20px"
@@ -84,18 +83,11 @@ const App = () => {
               onClick={onSaveClick}>
               Save
             </PrimaryButton>
-
-
           </div>
-
-
         </div>
-      )
-      }
-
+      )}
     </div>
   )
-
 }
 
 window.initComponent = containerElement => {
